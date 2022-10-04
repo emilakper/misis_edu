@@ -1,33 +1,34 @@
 #include <iostream>
+#include <array>
 #include <string>
 
 int main() {
+    std::ios_base::sync_with_stdio(false);
     int t;
     int n;
     int k;
     std::string password;
-    std::string special;
+    std::array <int, 128> special {0};
     password.reserve(100000);
     std::cin >> t;
     while (t--) {
         std::cin >> n;
         password.resize(n);
-        for (int i = 0; i < n; ++i) {
-            std::cin >> password[i];
-        }
+        std::cin >> password;
         std::cin >> k;
-        for (int i = 0; i < k; ++i) {
-            std::cin >> special[i];
+        for (int i = 0; i < 128; ++i) {
+            special[i] = 0;
         }
+        unsigned char ch = 0;
+        for (int i = 0; i < k; ++i) {
+            std::cin >> ch;
+            special[ch] = 1;;
+        }
+
         int pos = -1;
         for (int i = n - 1; i >= 0; --i) {
-            for (int p = 0; p < k; ++p) {
-                if (password[i] == special[p]) {
-                    pos = i;
-                    break;
-                }
-            }
-            if (pos != -1) {
+            if (special[password[i]] == 1) {
+                pos = i;
                 break;
             }
         }
@@ -36,16 +37,14 @@ int main() {
         int count = 0;
         for (int i = pos - 1; i >= 0; --i) {
             ++count;
-            for (int p = 0; p < k; p++) {
-                if (password[i] == special[p]) {
-                    if (count > max) {
-                        max = count;
-                    }
-                    count = 0;
-                    break;
+            if (special[password[i]] == 1) {
+                if (count > max) {
+                    max = count;
                 }
+                count = 0;
             }
         }
+        
         if (count > max)
             max = count;
         if (max == 0)
