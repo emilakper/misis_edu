@@ -7,7 +7,6 @@ int main() {
     int i;
     int j;
     std::string x;
-    std::string z = "#";
     int xi;
     int xj;
     bool f;
