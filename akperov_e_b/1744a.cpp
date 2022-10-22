@@ -5,30 +5,28 @@
 
 int main() {
     int n;
+    int m; 
+    int i;
     std::string x;
-    const int nMax = 50;
-    std::array <int, nMax> a{ '0' };
-    int t;
-    std::cin >> t;
-    bool f;
-    while (t--){
-        f = true;
-        std::cin >> n;
-        for (int i = 0; i < n; i++) {
-            std::cin >> a[i];
-        }
+    const int nMax = 3000;
+    std::array <std::string, nMax> a{};
+    std::array <std::string, nMax> b{};
+    
+    std::cin >> n >> m;
+    for (i = 0; i < m;i++) {
+        std::cin >> a[i] >> b[i];
+    }
+    while (n--) {
         std::cin >> x;
+        for (i = 0; i < m; i++) {
+            if (a[i] == x || b[i] == x) {
+                if (a[i].length() > b[i].length())
+                    std::cout << b[i] << " ";
+                else
+                    std::cout << a[i] << " ";
 
-        for (int i = 0; i < n-1; i++) {
-            for (int j = i+1; j < n; j++) {
-                if (a[i] == a[j] && x[i] != x[j])
-                    f = false;
             }
         }
-        if (f)
-            std::cout << "YES" << "\n";
-        else
-            std::cout << "NO" <<"\n";
     }
 
 }
