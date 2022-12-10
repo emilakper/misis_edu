@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 
 struct state {
@@ -14,29 +15,43 @@ struct state {
 
 
 int main() {
+
     double k = 1;
     double dt = 1e-1;
     double t = 0;
-    
-    state point{ {0.0,10.0}
-                ,{0.31,0.0 }
+    int counter = 0;
+    std::ofstream fout("results.txt");
+
+    state point{ {0.0,15.0}
+                ,{0.0,0.0 }
                 ,{0.0,0.0 } };
 
     Rdec2D g;
 
-    while (t < 100000) {
+
+    while (counter < 10000) {
         g = -point.r *(1/norm(point.r)) * (k / (dot(point.r, point.r)));
-        point.v += point.a * dt;
-        point.v += g * dt;
+        point.v = point.v + point.a * dt + g * dt;
         point.r += point.v * dt;
-        if (norm(point.r) < 1)
-            dt = 1e-5;
-        else
-            dt =1e-1;
-        std::cout << "rad - " << point.r << " speed - " << point.v << "  acceleration - " << g << "\n";
+
+
+        if (std::abs(point.r.x) < 3 * k && std::abs(point.r.y) < 3*k) {
+            point.r -= point.v * dt;
+            point.v = point.v - point.a * dt - g * dt;
+            point.r = -point.r;
+            std::cout << "op, teleport rpred=" << std::endl;
+        }
+
+        //std::cout << "rad - " << point.r << " speed - " << point.v << "  acceleration - " << g << "\n";
+        
+        if (counter % 5 == 0) {
+            fout << point.r << " " << point.v << " " << point.a << "\n";
+        } 
+        
         t += dt;
+        counter ++;
     }
-    
+    fout.close();
 
 
 }
