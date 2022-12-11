@@ -27,26 +27,28 @@ int main() {
                 ,{0.0,0.0 } };
 
     Rdec2D g;
-
+    Rdec2D rpred;
 
     while (counter < 10000) {
-        g = -point.r *(1/norm(point.r)) * (k / (dot(point.r, point.r)));
+        rpred = (point.r-point.v * dt);
+        //std::cout << "point r for g= " << point.r << std::endl;
+        g = -point.r * (1 / norm(point.r)) * (k / (dot(point.r, point.r)));
         point.v = point.v + point.a * dt + g * dt;
         point.r += point.v * dt;
 
 
-        if (std::abs(point.r.x) < 3 * k && std::abs(point.r.y) < 3*k) {
+        if (std::abs(point.r.x) < 1e-1*k && std::abs(point.r.y) < 1e-1*k) {
             point.r -= point.v * dt;
-            point.v = point.v - point.a * dt - g * dt;
             point.r = -point.r;
-            std::cout << "op, teleport rpred=" << std::endl;
+            g = rpred * (1 / norm(rpred)) * (k / (dot(rpred, rpred)));
+            //std::cout << "op, teleport, rpred=" << rpred << std::endl;
         }
 
         //std::cout << "rad - " << point.r << " speed - " << point.v << "  acceleration - " << g << "\n";
         
-        if (counter % 5 == 0) {
-            fout << point.r << " " << point.v << " " << point.a << "\n";
-        } 
+       if (counter % 5 == 0) {
+           fout << point.r << " " << point.v << " " << point.a << "\n";
+       }
         
         t += dt;
         counter ++;
