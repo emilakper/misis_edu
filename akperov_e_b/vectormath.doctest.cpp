@@ -1,6 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
-#include <vectormath/vectormath.hpp>
+#include <geom/geom.hpp>
 
 TEST_CASE("Checking the sum of Rdec2D") {
     CHECK(Rdec2D{ 5.0, 4.0 } + Rdec2D{ 5.0, 6.0 } ==

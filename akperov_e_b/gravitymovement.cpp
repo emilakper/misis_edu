@@ -1,5 +1,5 @@
 #define _USE_MATH_DEFINES
-#include <vectormath/vectormath.hpp>
+#include <geom/geom.hpp>
 #include <cmath>
 #include <iostream>
 #include <iomanip>
@@ -22,9 +22,9 @@ int main() {
     int counter = 0;
     std::ofstream fout("results.txt");
 
-    state point{ {0.0,15.0}
-                ,{0.0,0.0 }
-                ,{0.0,0.0 } };
+    state point{ {5.0,-10.0}
+                ,{0.0,0.5 }
+                ,{0.0,0.0 }};
 
     Rdec2D g;
     Rdec2D rpred;
