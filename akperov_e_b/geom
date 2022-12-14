@@ -1,0 +1,1 @@
+﻿add_library(vectormath vectormath01.cpp vectormath.hpp)
