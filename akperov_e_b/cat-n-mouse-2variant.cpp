@@ -39,7 +39,7 @@ void Solution_Simple(Rdec2D r_m, Rdec2D r_c, Rdec2D v_m, Rdec2D v_c, double CatR
     else if (last <= norm(r_m - r_c)) {
         std::cout << "Mouse ran away \n";
     }*/
-    std::cout << s_mouse/s_cat;
+    //std::cout << s_mouse/s_cat;
 }
 
 
@@ -88,7 +88,7 @@ double which_vc_catch(Rdec2D r_m, Rdec2D r_c, Rdec2D v_m, Rdec2D v_c, double Cat
 
 
 
-/* Òåñò ïðîãðàììû ( îïðåäåëåíèå îäíîãî èç òðåõ âîçìîæíûõ ðåçóëüòàòîâ ïðè ðàçíûõ óñëîâèÿõ ) 
+/* Å‡ÄºÅ„Åˆ ÄÄ‘Ã®ÄƒÄ‘Å•Ä›Ä›Å± ( Ã®ÄÄ‘ÄºÃ¤ÄºÃ«ÄºÃ­ÄÄº Ã®Ã¤Ã­Ã®ÄƒÃ® ÄÃ§ ÅˆÄ‘ÄºÅ‘ Ã¢Ã®Ã§Ä›Ã®Ä‡Ã­Å±Å‘ Ä‘ÄºÃ§Ã³Ã«Ã¼ÅˆÅ•ÅˆÃ®Ã¢ ÄÄ‘Ä Ä‘Å•Ã§Ã­Å±Å‘ Ã³Å„Ã«Ã®Ã¢ÄË™Å‘ ) 
 int main() {
     Rdec2D r_m{ 0.0, -20.0 }; Rdec2D r_c{ 10.0 ,-10.0 }; Rdec2D v_m{ -5.0, 8.0 }; Rdec2D v_c;
     double CatRad = 1.0;
@@ -129,9 +129,11 @@ int main() {
 
 int main() {
     Rdec2D r_m{ 0.0, -20.0 }; Rdec2D r_c{ 20.0 ,0.0 }; Rdec2D v_m{ 0.0, 4.0 }; Rdec2D v_c;
+    std::cout << "Print y_m and x_c \n";
+    std::cin >> r_m.y >> r_c.x;
     double CatRad = 1.0;
     v_c = (r_m - r_c) * (1 / norm(r_m - r_c));
     double answerv = which_vc_catch(r_m, r_c, v_m, v_c, CatRad);
     std::cout << answerv << std::endl;
-    Solution_Simple(r_m, r_c, v_m, v_c, CatRad, answerv);
+    //Solution_Simple(r_m, r_c, v_m, v_c, CatRad, answerv);
 }
